@@ -1,0 +1,5 @@
+<?php
+
+require view("iletisim");
+
+?>
