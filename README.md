@@ -15,3 +15,7 @@ PAYTR, GPAY, CHIPCIN, SHOPIER
 
 Game Kart Api
 TempoPlay, EnjoyPoker, TurnPoker
+
+Demo Sayfa:
+https://onlinepin.phpscript.info/
+https://onlinepin.phpscript.info/admin
