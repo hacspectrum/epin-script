@@ -1,14 +1,13 @@
-﻿-- phpMyAdmin SQL Dump
--- version 4.8.5
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Anamakine: localhost:3306
--- Üretim Zamanı: 31 Tem 2019, 17:11:32
--- Sunucu sürümü: 5.6.44
--- PHP Sürümü: 7.2.7
+-- Host: localhost
+-- Generation Time: Mar 20, 2023 at 06:28 PM
+-- Server version: 10.2.41-MariaDB
+-- PHP Version: 7.2.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Veritabanı: `uyegram`
+-- Database: `phpscrip_epin`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `bankalar`
+-- Table structure for table `bankalar`
 --
 
 CREATE TABLE `bankalar` (
@@ -40,7 +39,7 @@ CREATE TABLE `bankalar` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
--- Tablo döküm verisi `bankalar`
+-- Dumping data for table `bankalar`
 --
 
 INSERT INTO `bankalar` (`id`, `banka_adi`, `banka_gorsel`, `banka_type`, `adsoyad`, `iban`, `hesapno`, `subeno`) VALUES
@@ -58,7 +57,7 @@ INSERT INTO `bankalar` (`id`, `banka_adi`, `banka_gorsel`, `banka_type`, `adsoya
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `bayi_kategori_indirimleri`
+-- Table structure for table `bayi_kategori_indirimleri`
 --
 
 CREATE TABLE `bayi_kategori_indirimleri` (
@@ -71,27 +70,27 @@ CREATE TABLE `bayi_kategori_indirimleri` (
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `bize_sat`
+-- Table structure for table `bize_sat`
 --
 
 CREATE TABLE `bize_sat` (
   `id` int(11) NOT NULL,
-  `bayi` int(11) NOT NULL DEFAULT '0',
+  `bayi` int(11) NOT NULL DEFAULT 0,
   `urun_id` int(11) NOT NULL,
   `uye_id` int(11) NOT NULL,
   `adet` int(11) NOT NULL,
-  `yorum` text COLLATE utf8_turkish_ci,
-  `durum` int(11) NOT NULL DEFAULT '0',
+  `yorum` text COLLATE utf8_turkish_ci DEFAULT NULL,
+  `durum` int(11) NOT NULL DEFAULT 0,
   `email` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
-  `verilecek_tutar` float NOT NULL DEFAULT '0',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `verilecek_tutar` float NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `cekim_bildirimleri`
+-- Table structure for table `cekim_bildirimleri`
 --
 
 CREATE TABLE `cekim_bildirimleri` (
@@ -101,29 +100,29 @@ CREATE TABLE `cekim_bildirimleri` (
   `iban` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `hesapno` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `subeno` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
-  `miktar` float NOT NULL DEFAULT '0',
-  `durum` int(11) NOT NULL DEFAULT '0',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `miktar` float NOT NULL DEFAULT 0,
+  `durum` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `uye_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `chip_kategoriler`
+-- Table structure for table `chip_kategoriler`
 --
 
 CREATE TABLE `chip_kategoriler` (
   `id` int(11) NOT NULL,
-  `siralama` int(11) NOT NULL DEFAULT '0',
+  `siralama` int(11) NOT NULL DEFAULT 0,
   `kategori_adi` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `aciklama` text COLLATE utf8_turkish_ci NOT NULL,
   `gorsel` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
-  `anasayfa_gorunumu` int(11) NOT NULL DEFAULT '0'
+  `anasayfa_gorunumu` int(11) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
--- Tablo döküm verisi `chip_kategoriler`
+-- Dumping data for table `chip_kategoriler`
 --
 
 INSERT INTO `chip_kategoriler` (`id`, `siralama`, `kategori_adi`, `aciklama`, `gorsel`, `anasayfa_gorunumu`) VALUES
@@ -150,7 +149,7 @@ INSERT INTO `chip_kategoriler` (`id`, `siralama`, `kategori_adi`, `aciklama`, `g
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `chip_urunler`
+-- Table structure for table `chip_urunler`
 --
 
 CREATE TABLE `chip_urunler` (
@@ -158,24 +157,24 @@ CREATE TABLE `chip_urunler` (
   `urun_adi` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `seourl` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `makale` text COLLATE utf8_turkish_ci NOT NULL,
-  `fiyat` float DEFAULT '0',
-  `bizesat_durum` int(11) DEFAULT '0',
-  `bizesat_fiyat` float DEFAULT '0',
+  `fiyat` float DEFAULT 0,
+  `bizesat_durum` int(11) DEFAULT 0,
+  `bizesat_fiyat` float DEFAULT 0,
   `kategori_id` int(11) NOT NULL,
-  `stok` int(11) DEFAULT '1',
-  `aciklama` text COLLATE utf8_turkish_ci,
-  `siralama` int(11) NOT NULL DEFAULT '0',
+  `stok` int(11) DEFAULT 1,
+  `aciklama` text COLLATE utf8_turkish_ci DEFAULT NULL,
+  `siralama` int(11) NOT NULL DEFAULT 0,
   `chip_miktar` varchar(255) COLLATE utf8_turkish_ci DEFAULT '0',
   `api_amount` varchar(255) COLLATE utf8_turkish_ci DEFAULT '0',
-  `api_id` int(11) DEFAULT '0',
-  `api_type` int(11) DEFAULT '0',
-  `api_chipcin` int(11) DEFAULT '0',
+  `api_id` int(11) DEFAULT 0,
+  `api_type` int(11) DEFAULT 0,
+  `api_chipcin` int(11) DEFAULT 0,
   `api_chipcin_id` int(11) DEFAULT NULL,
   `api_chipcin_cat_id` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
--- Tablo döküm verisi `chip_urunler`
+-- Dumping data for table `chip_urunler`
 --
 
 INSERT INTO `chip_urunler` (`id`, `urun_adi`, `seourl`, `makale`, `fiyat`, `bizesat_durum`, `bizesat_fiyat`, `kategori_id`, `stok`, `aciklama`, `siralama`, `chip_miktar`, `api_amount`, `api_id`, `api_type`, `api_chipcin`, `api_chipcin_id`, `api_chipcin_cat_id`) VALUES
@@ -271,27 +270,26 @@ INSERT INTO `chip_urunler` (`id`, `urun_adi`, `seourl`, `makale`, `fiyat`, `bize
 (501, 'Netflix 1 Aylık Üyelik', 'netflix-1-aylik-uyelik', '<p>Sipariş sonrası &quot;Siparişlerim&quot; b&ouml;l&uuml;m&uuml;ne girerek size &ouml;zel oluşturulan Netflix Kullanıcı ve Şifresiyle 1 Aylık Netflix aboneliğine sahip olucaksınız.&nbsp;</p>\r\n\r\n<p>1 Aylık s&uuml;re sonrası tekrar &uuml;yelik almak isterseniz yeniden bir sipariş ge&ccedil;erek yeni bir kullanıcı ve şifresi edinmelisiniz.</p>', 5, 0, 0, 59, 1, NULL, 0, '0', '0', 0, 0, 0, 0, 0),
 (502, 'Spotify 3 Aylık Premium Üyeliği', 'spotify-3-aylik-premium-uyeligi', '<p>Sipariş sonrası &quot;Siparişlerim&quot; b&ouml;l&uuml;m&uuml;ne girerek size &ouml;zel oluşturulan Spotify Kullanıcı ve Şifresiyle 1 Aylık Spotify aboneliğine sahip olucaksınız.&nbsp;</p>\r\n\r\n<p>3 Aylık s&uuml;re sonrası tekrar &uuml;yelik almak isterseniz yeniden bir sipariş ge&ccedil;erek yeni bir kullanıcı ve şifresi edinmelisiniz.</p>', 5, 0, 0, 60, 1, NULL, 0, '0', '0', 0, 0, 0, 0, 0),
 (503, '3 Aylık BluTv Üyelik', '3-aylik-blutv-uyelik', '', 49, 0, 0, 61, 1, NULL, 0, '0', '0', 0, 0, 0, 0, 0),
-(504, '6 Aylık BluTv Üyelik', '6-aylik-blutv-uyelik', '', 86, 0, 0, 61, 1, NULL, 0, '0', '0', 0, 0, 0, 0, 0),
-(505, 'Test', 'test', '', 1, 0, 0, 70, 1, NULL, 0, '0', '0', 0, 0, 0, 0, 0);
+(504, '6 Aylık BluTv Üyelik', '6-aylik-blutv-uyelik', '', 86, 0, 0, 61, 1, NULL, 0, '0', '0', 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `codes`
+-- Table structure for table `codes`
 --
 
 CREATE TABLE `codes` (
   `id` int(11) NOT NULL,
   `code` text COLLATE utf8_turkish_ci NOT NULL,
   `product_id` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0',
-  `user_id` int(11) DEFAULT '0'
+  `status` int(11) NOT NULL DEFAULT 0,
+  `user_id` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `diger_ayarlar`
+-- Table structure for table `diger_ayarlar`
 --
 
 CREATE TABLE `diger_ayarlar` (
@@ -303,9 +301,9 @@ CREATE TABLE `diger_ayarlar` (
   `GPAY_KEY` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `BAYII_INDIRIMI` int(11) NOT NULL,
   `EKSTRA_SCRIPT` text COLLATE utf8_turkish_ci NOT NULL,
-  `TEMPO_POKER_API_KEY` text COLLATE utf8_turkish_ci,
-  `TURN_POKER_API_KEY` text COLLATE utf8_turkish_ci,
-  `ENJOY_POKER_API_KEY` text COLLATE utf8_turkish_ci,
+  `TEMPO_POKER_API_KEY` text COLLATE utf8_turkish_ci DEFAULT NULL,
+  `TURN_POKER_API_KEY` text COLLATE utf8_turkish_ci DEFAULT NULL,
+  `ENJOY_POKER_API_KEY` text COLLATE utf8_turkish_ci DEFAULT NULL,
   `FACEBOOK_APP_GRAPH_VERSION` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `FACEBOOK_API_SECRET` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `FACEBOOK_API_ID` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
@@ -313,21 +311,21 @@ CREATE TABLE `diger_ayarlar` (
   `MAIL_SIFRE` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `CHIPCIN_EMAIL` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `CHIPCIN_SIFRE` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
-  `SHOPIER_API_KEY` text COLLATE utf8_turkish_ci,
-  `SHOPIER_API_SECRET` text COLLATE utf8_turkish_ci
+  `SHOPIER_API_KEY` text COLLATE utf8_turkish_ci DEFAULT NULL,
+  `SHOPIER_API_SECRET` text COLLATE utf8_turkish_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
--- Tablo döküm verisi `diger_ayarlar`
+-- Dumping data for table `diger_ayarlar`
 --
 
 INSERT INTO `diger_ayarlar` (`id`, `PAYTR_MERCHANT_ID`, `PAYTR_MERCHANT_KEY`, `PAYTR_MERCHANT_SALT`, `GPAY_USERNAME`, `GPAY_KEY`, `BAYII_INDIRIMI`, `EKSTRA_SCRIPT`, `TEMPO_POKER_API_KEY`, `TURN_POKER_API_KEY`, `ENJOY_POKER_API_KEY`, `FACEBOOK_APP_GRAPH_VERSION`, `FACEBOOK_API_SECRET`, `FACEBOOK_API_ID`, `MAIL_ADRES`, `MAIL_SIFRE`, `CHIPCIN_EMAIL`, `CHIPCIN_SIFRE`, `SHOPIER_API_KEY`, `SHOPIER_API_SECRET`) VALUES
-(1, '136751', 'NpuCmXQLZKkMnBF5', 'C7A9RtBZhCNLnhor', '', '', 3, '<!--Start of Tawk.to Script-->\r\n<script type=\"text/javascript\">\r\nvar Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();\r\n(function(){\r\nvar s1=document.createElement(\"script\"),s0=document.getElementsByTagName(\"script\")[0];\r\ns1.async=true;\r\ns1.src=\'https://embed.tawk.to/5d05121a53d10a56bd7a3d80/default\';\r\ns1.charset=\'UTF-8\';\r\ns1.setAttribute(\'crossorigin\',\'*\');\r\ns0.parentNode.insertBefore(s1,s0);\r\n})();\r\n</script>\r\n<!--End of Tawk.to Script-->\r\n\r\n<!-- Global site tag (gtag.js) - Google Analytics -->\r\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-142288793-1\"></script>\r\n<script>\r\n  window.dataLayer = window.dataLayer || [];\r\n  function gtag(){dataLayer.push(arguments);}\r\n  gtag(\'js\', new Date());\r\n\r\n  gtag(\'config\', \'UA-142288793-1\');\r\n</script>', '', '', '', '', '', '', '', '', '', '', '', '');
+(1, '136751', 'NpuCmXQLZKkMnBF5', 'C7A9RtBZhCNLnhor', '', '', 3, '<!--Start of Tawk.to Script-->', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `duyurular`
+-- Table structure for table `duyurular`
 --
 
 CREATE TABLE `duyurular` (
@@ -336,7 +334,7 @@ CREATE TABLE `duyurular` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
--- Tablo döküm verisi `duyurular`
+-- Dumping data for table `duyurular`
 --
 
 INSERT INTO `duyurular` (`id`, `duyuru`) VALUES
@@ -346,7 +344,7 @@ INSERT INTO `duyurular` (`id`, `duyuru`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `genel_ayarlar`
+-- Table structure for table `genel_ayarlar`
 --
 
 CREATE TABLE `genel_ayarlar` (
@@ -368,16 +366,16 @@ CREATE TABLE `genel_ayarlar` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
--- Tablo döküm verisi `genel_ayarlar`
+-- Dumping data for table `genel_ayarlar`
 --
 
 INSERT INTO `genel_ayarlar` (`id`, `hakkimizda_metni`, `anasayfa_kategori_listeleme_basligi`, `skype`, `telefon`, `masabulucu`, `adres`, `anasayfa_yazi_baslik`, `anasayfa_yazi`, `meta_description`, `meta_keywords`, `site_title`, `facebook_url`, `instagram_url`, `twitter_url`) VALUES
-(1, '<p><a href=\"https://www.uyegram.com/hakkimizda\"><span style=\"color:#ffffff\">Hakkımızda</span></a></p>\r\n\r\n<p><a href=\"https://www.uyegram.com/iade\"><span style=\"color:#ffffff\">İade Ve Değişim</span></a></p>\r\n\r\n<p><a href=\"https://www.uyegram.com/sifremi-unuttum\"><span style=\"color:#ffffff\">Şifremi Unuttum</span></a></p>\r\n\r\n<p><a href=\"https://www.uyegram.com/iletisim\"><span style=\"color:#ffffff\">İletişim</span></a></p>', 'ÇOK SATANLAR', '#', '0850 333 39 39', '#', '2019', '', '', 'Türkiye \'nin En İyi Dijital Üyelik ve Epin Satış Platformu', 'Türkiye \'nin En İyi Dijital Üyelik ve Epin Satış Platformu', 'Türkiye \'nin En İyi Dijital Üyelik ve Epin Satış Platformu', 'https://www.facebook.com/#', 'https://www.instagram.com/#', 'https://twitter.com/#');
+(1, '<p><a href=\"https://www.uyegram.com/hakkimizda\"><span style=\"color:#ffffff\">Hakkımızda</span></a></p>\r\n\r\n<p><a href=\"https://www.uyegram.com/iade\"><span style=\"color:#ffffff\">İade Ve Değişim</span></a></p>\r\n\r\n<p><a href=\"https://www.uyegram.com/sifremi-unuttum\"><span style=\"color:#ffffff\">Şifremi Unuttum</span></a></p>\r\n\r\n<p><a href=\"https://www.uyegram.com/iletisim\"><span style=\"color:#ffffff\">İletişim</span></a></p>', 'ÇOK SATANLAR', '#', '0850 123 45 67', '#', '2019', '', '', 'Türkiye \'nin En İyi Dijital Üyelik ve Epin Satış Platformu', 'Türkiye \'nin En İyi Dijital Üyelik ve Epin Satış Platformu', 'Türkiye \'nin En İyi Dijital Üyelik ve Epin Satış Platformu', 'https://www.facebook.com/#', 'https://www.instagram.com/#', 'https://twitter.com/#');
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `hareketler`
+-- Table structure for table `hareketler`
 --
 
 CREATE TABLE `hareketler` (
@@ -385,11 +383,11 @@ CREATE TABLE `hareketler` (
   `hareket_tipi` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `uye_id` int(11) NOT NULL,
   `tarih` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
-  `ek` text COLLATE utf8_turkish_ci
+  `ek` text COLLATE utf8_turkish_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
--- Tablo döküm verisi `hareketler`
+-- Dumping data for table `hareketler`
 --
 
 INSERT INTO `hareketler` (`id`, `hareket_tipi`, `uye_id`, `tarih`, `ek`) VALUES
@@ -557,12 +555,70 @@ INSERT INTO `hareketler` (`id`, `hareket_tipi`, `uye_id`, `tarih`, `ek`) VALUES
 (162, 'giris', 10, '20.06.2019 02:19', '{\"giris_tarihi\":\"20.06.2019 02:19\"}'),
 (163, 'giris', 10, '20.06.2019 12:57', '{\"giris_tarihi\":\"20.06.2019 12:57\"}'),
 (164, 'giris', 10, '20.06.2019 20:47', '{\"giris_tarihi\":\"20.06.2019 20:47\"}'),
-(165, 'giris', 10, '30.07.2019 17:55', '{\"giris_tarihi\":\"30.07.2019 17:55\"}');
+(165, 'giris', 10, '30.07.2019 17:55', '{\"giris_tarihi\":\"30.07.2019 17:55\"}'),
+(166, 'giris', 623, '03.10.2019 11:07', '{\"giris_tarihi\":\"03.10.2019 11:07\"}'),
+(167, 'siparis', 623, '03.10.2019 11:07', '{\"urun_id\":\"503\",\"urun_tipi\":\"Normal\",\"adet\":\"1\",\"toplam_fiyat\":49}'),
+(168, 'giris', 623, '03.10.2019 11:08', '{\"giris_tarihi\":\"03.10.2019 11:08\"}'),
+(169, 'giris', 623, '03.10.2019 11:09', '{\"giris_tarihi\":\"03.10.2019 11:09\"}'),
+(170, 'giris', 10, '03.10.2019 11:15', '{\"giris_tarihi\":\"03.10.2019 11:15\"}'),
+(171, 'siparis', 10, '03.10.2019 11:15', '{\"urun_id\":\"503\",\"urun_tipi\":\"Normal\",\"adet\":\"1\",\"toplam_fiyat\":49}'),
+(172, 'giris', 10, '03.10.2019 11:47', '{\"giris_tarihi\":\"03.10.2019 11:47\"}'),
+(173, 'giris', 623, '16.11.2019 10:15', '{\"giris_tarihi\":\"16.11.2019 10:15\"}'),
+(174, 'giris', 10, '05.12.2019 20:58', '{\"giris_tarihi\":\"05.12.2019 20:58\"}'),
+(175, 'siparis', 10, '05.12.2019 20:58', '{\"urun_id\":\"502\",\"urun_tipi\":\"Normal\",\"adet\":\"1\",\"toplam_fiyat\":5}'),
+(176, 'giris', 628, '05.12.2019 22:28', '{\"giris_tarihi\":\"05.12.2019 22:28\"}'),
+(177, 'siparis', 628, '05.12.2019 22:28', '{\"urun_id\":\"425\",\"urun_tipi\":\"Normal\",\"adet\":\"1\",\"toplam_fiyat\":3}'),
+(178, 'siparis', 628, '05.12.2019 22:29', '{\"urun_id\":\"453\",\"urun_tipi\":\"Normal\",\"adet\":\"1\",\"toplam_fiyat\":29}'),
+(179, 'giris', 623, '31.01.2020 12:40', '{\"giris_tarihi\":\"31.01.2020 12:40\"}'),
+(180, 'giris', 10, '31.01.2020 12:41', '{\"giris_tarihi\":\"31.01.2020 12:41\"}'),
+(181, 'giris', 10, '31.01.2020 12:55', '{\"giris_tarihi\":\"31.01.2020 12:55\"}'),
+(182, 'giris', 10, '10.07.2020 09:27', '{\"giris_tarihi\":\"10.07.2020 09:27\"}'),
+(183, 'giris', 623, '13.07.2020 15:35', '{\"giris_tarihi\":\"13.07.2020 15:35\"}'),
+(184, 'siparis', 623, '13.07.2020 15:36', '{\"urun_id\":\"502\",\"urun_tipi\":\"Normal\",\"adet\":\"1\",\"toplam_fiyat\":5}'),
+(185, 'giris', 10, '13.07.2020 15:37', '{\"giris_tarihi\":\"13.07.2020 15:37\"}'),
+(186, 'giris', 10, '13.07.2020 15:40', '{\"giris_tarihi\":\"13.07.2020 15:40\"}'),
+(187, 'giris', 623, '13.07.2020 15:43', '{\"giris_tarihi\":\"13.07.2020 15:43\"}'),
+(188, 'siparis', 623, '13.07.2020 15:43', '{\"urun_id\":\"495\",\"urun_tipi\":\"Normal\",\"adet\":\"1\",\"toplam_fiyat\":1.18}'),
+(189, 'siparis', 623, '13.07.2020 15:43', '{\"urun_id\":\"411\",\"urun_tipi\":\"Normal\",\"adet\":\"1\",\"toplam_fiyat\":12}'),
+(190, 'giris', 623, '22.07.2020 22:07', '{\"giris_tarihi\":\"22.07.2020 22:07\"}'),
+(191, 'giris', 623, '05.10.2020 08:19', '{\"giris_tarihi\":\"05.10.2020 08:19\"}'),
+(192, 'siparis', 623, '05.10.2020 08:20', '{\"urun_id\":\"417\",\"urun_tipi\":\"Normal\",\"adet\":\"1\",\"toplam_fiyat\":3.1}'),
+(193, 'giris', 10, '05.10.2020 08:21', '{\"giris_tarihi\":\"05.10.2020 08:21\"}'),
+(194, 'giris', 10, '05.10.2020 08:33', '{\"giris_tarihi\":\"05.10.2020 08:33\"}'),
+(195, 'giris', 10, '05.10.2020 08:40', '{\"giris_tarihi\":\"05.10.2020 08:40\"}'),
+(196, 'giris', 10, '13.11.2020 21:40', '{\"giris_tarihi\":\"13.11.2020 21:40\"}'),
+(197, 'siparis', 10, '13.11.2020 21:54', '{\"urun_id\":\"498\",\"urun_tipi\":\"Normal\",\"adet\":\"1\",\"toplam_fiyat\":23.6}'),
+(198, 'giris', 623, '02.12.2020 12:58', '{\"giris_tarihi\":\"02.12.2020 12:58\"}'),
+(199, 'giris', 623, '02.12.2020 15:31', '{\"giris_tarihi\":\"02.12.2020 15:31\"}'),
+(200, 'giris', 629, '22.05.2021 15:32', '{\"giris_tarihi\":\"22.05.2021 15:32\"}'),
+(201, 'siparis', 629, '22.05.2021 15:52', '{\"urun_id\":\"503\",\"urun_tipi\":\"Normal\",\"adet\":\"1\",\"toplam_fiyat\":49}'),
+(202, 'giris', 10, '20.08.2021 23:34', '{\"giris_tarihi\":\"20.08.2021 23:34\"}'),
+(203, 'giris', 10, '10.12.2021 10:56', '{\"giris_tarihi\":\"10.12.2021 10:56\"}'),
+(204, 'siparis', 10, '10.12.2021 10:57', '{\"urun_id\":\"502\",\"urun_tipi\":\"Normal\",\"adet\":\"1\",\"toplam_fiyat\":5}'),
+(205, 'giris', 10, '10.12.2021 14:05', '{\"giris_tarihi\":\"10.12.2021 14:05\"}'),
+(206, 'giris', 10, '10.12.2021 14:20', '{\"giris_tarihi\":\"10.12.2021 14:20\"}'),
+(207, 'giris', 10, '10.12.2021 15:07', '{\"giris_tarihi\":\"10.12.2021 15:07\"}'),
+(208, 'giris', 10, '23.12.2021 23:06', '{\"giris_tarihi\":\"23.12.2021 23:06\"}'),
+(209, 'giris', 623, '24.12.2021 15:00', '{\"giris_tarihi\":\"24.12.2021 15:00\"}'),
+(210, 'giris', 10, '24.12.2021 15:00', '{\"giris_tarihi\":\"24.12.2021 15:00\"}'),
+(211, 'giris', 10, '19.02.2022 02:57', '{\"giris_tarihi\":\"19.02.2022 02:57\"}'),
+(212, 'giris', 10, '19.02.2022 02:58', '{\"giris_tarihi\":\"19.02.2022 02:58\"}'),
+(213, 'giris', 623, '19.02.2022 02:59', '{\"giris_tarihi\":\"19.02.2022 02:59\"}'),
+(214, 'giris', 10, '20.03.2023 01:58', '{\"giris_tarihi\":\"20.03.2023 01:58\"}'),
+(215, 'giris', 630, '20.03.2023 02:37', '{\"giris_tarihi\":\"20.03.2023 02:37\"}'),
+(216, 'siparis', 630, '20.03.2023 02:37', '{\"urun_id\":\"503\",\"urun_tipi\":\"Normal\",\"adet\":\"1\",\"toplam_fiyat\":49}'),
+(217, 'giris', 631, '20.03.2023 04:33', '{\"giris_tarihi\":\"20.03.2023 04:33\"}'),
+(218, 'siparis', 631, '20.03.2023 04:38', '{\"urun_id\":\"495\",\"urun_tipi\":\"Normal\",\"adet\":\"1\",\"toplam_fiyat\":1.18}'),
+(219, 'giris', 632, '20.03.2023 07:53', '{\"giris_tarihi\":\"20.03.2023 07:53\"}'),
+(220, 'giris', 633, '20.03.2023 10:42', '{\"giris_tarihi\":\"20.03.2023 10:42\"}'),
+(221, 'siparis', 633, '20.03.2023 10:42', '{\"urun_id\":\"502\",\"urun_tipi\":\"Normal\",\"adet\":\"1\",\"toplam_fiyat\":5}'),
+(222, 'giris', 634, '20.03.2023 17:04', '{\"giris_tarihi\":\"20.03.2023 17:04\"}'),
+(223, 'siparis', 634, '20.03.2023 17:04', '{\"urun_id\":\"503\",\"urun_tipi\":\"Normal\",\"adet\":\"1\",\"toplam_fiyat\":49}');
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `makaleler`
+-- Table structure for table `makaleler`
 --
 
 CREATE TABLE `makaleler` (
@@ -576,7 +632,7 @@ CREATE TABLE `makaleler` (
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `odeme_bildirimleri`
+-- Table structure for table `odeme_bildirimleri`
 --
 
 CREATE TABLE `odeme_bildirimleri` (
@@ -586,65 +642,97 @@ CREATE TABLE `odeme_bildirimleri` (
   `odeme_yapan_kisi` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `miktar` float NOT NULL,
   `tarih` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
-  `durum` int(11) NOT NULL DEFAULT '0',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `durum` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `pay_api`
+-- Table structure for table `pay_api`
 --
 
 CREATE TABLE `pay_api` (
   `id` int(11) NOT NULL,
   `trade_code` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
-  `uye_id` int(11) NOT NULL DEFAULT '0',
-  `tutar` float NOT NULL DEFAULT '0',
-  `komisyon` int(11) NOT NULL DEFAULT '0',
-  `durum` int(11) NOT NULL DEFAULT '2',
+  `uye_id` int(11) NOT NULL DEFAULT 0,
+  `tutar` float NOT NULL DEFAULT 0,
+  `komisyon` int(11) NOT NULL DEFAULT 0,
+  `durum` int(11) NOT NULL DEFAULT 2,
   `api_type` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
--- Tablo döküm verisi `pay_api`
+-- Dumping data for table `pay_api`
 --
 
 INSERT INTO `pay_api` (`id`, `trade_code`, `uye_id`, `tutar`, `komisyon`, `durum`, `api_type`, `created_at`) VALUES
 (1, '554618a9b4', 10, 1, 0, 0, 'paytr', '2019-06-19 10:28:48'),
 (2, '51ffb14eeb', 10, 1, 0, 1, 'paytr', '2019-06-19 10:46:50'),
-(3, '758cd49ee2', 10, 1, 0, 1, 'paytr', '2019-06-19 11:26:12');
+(3, '758cd49ee2', 10, 1, 0, 1, 'paytr', '2019-06-19 11:26:12'),
+(4, '3ac7aea348', 10, 5, 0, 0, 'paytr', '2019-10-03 08:48:03'),
+(5, 'f5613e1899', 10, 100, 0, 0, 'paytr', '2019-10-03 08:51:04'),
+(6, '86e4d99a39', 10, 100, 0, 0, 'paytr', '2019-10-03 08:52:25'),
+(7, 'e7c3e13816', 10, 100, 0, 0, 'paytr', '2019-10-03 09:00:53'),
+(8, '3606cf6236', 628, 5, 0, 0, 'paytr', '2019-12-05 19:30:10'),
+(9, 'f46c8de5ee', 10, 54, 2, 0, 'paytr', '2020-11-13 18:41:27'),
+(10, '3805f5e76f', 629, 5, 0, 0, 'paytr', '2021-05-22 12:32:48'),
+(11, '613a59c1f4', 631, 10, 0, 2, 'paytr', '2023-03-20 01:33:55'),
+(12, 'cdd08b5238', 632, 5, 0, 2, 'paytr', '2023-03-20 04:54:04'),
+(13, '5284579d45', 634, 5, 0, 2, 'paytr', '2023-03-20 14:04:35');
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `siparisler`
+-- Table structure for table `siparisler`
 --
 
 CREATE TABLE `siparisler` (
   `id` int(11) NOT NULL,
   `islem_no` varchar(40) COLLATE utf8_turkish_ci DEFAULT NULL,
-  `bayi` int(11) NOT NULL DEFAULT '0',
+  `bayi` int(11) NOT NULL DEFAULT 0,
   `urun_id` int(11) NOT NULL,
   `uye_id` int(11) NOT NULL,
   `chipcin_pid` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `adet` int(11) NOT NULL,
   `odenen_tutar` float NOT NULL,
-  `yorum` text COLLATE utf8_turkish_ci,
-  `durum` int(11) NOT NULL DEFAULT '0',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `yorum` text COLLATE utf8_turkish_ci DEFAULT NULL,
+  `durum` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `email` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `api_code` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
-  `aciklama` text COLLATE utf8_turkish_ci,
-  `musteri_aciklama` text COLLATE utf8_turkish_ci
+  `aciklama` text COLLATE utf8_turkish_ci DEFAULT NULL,
+  `musteri_aciklama` text COLLATE utf8_turkish_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Dumping data for table `siparisler`
+--
+
+INSERT INTO `siparisler` (`id`, `islem_no`, `bayi`, `urun_id`, `uye_id`, `chipcin_pid`, `adet`, `odenen_tutar`, `yorum`, `durum`, `created_at`, `email`, `password`, `api_code`, `aciklama`, `musteri_aciklama`) VALUES
+(7, '417995', 0, 503, 623, NULL, 1, 49, NULL, 0, '2019-10-03 08:07:19', '', '', NULL, NULL, ''),
+(8, '780281', 1, 503, 10, NULL, 1, 49, NULL, 0, '2019-10-03 08:15:37', '', '', NULL, NULL, ''),
+(9, '809018', 0, 502, 10, NULL, 1, 5, NULL, 0, '2019-12-05 17:58:24', '', '', NULL, NULL, ''),
+(10, '519825', 0, 425, 628, NULL, 1, 3, NULL, 0, '2019-12-05 19:28:45', '', '', NULL, NULL, ''),
+(11, '266887', 0, 453, 628, NULL, 1, 29, NULL, 0, '2019-12-05 19:29:47', '', '', NULL, NULL, ''),
+(12, '497438', 0, 502, 623, NULL, 1, 5, NULL, 0, '2020-07-13 12:36:18', '', '', NULL, NULL, 'merhaba'),
+(13, '972007', 1, 495, 623, NULL, 1, 1.18, NULL, 0, '2020-07-13 12:43:37', '', '', NULL, NULL, ''),
+(14, '538221', 1, 411, 623, NULL, 1, 12, NULL, 0, '2020-07-13 12:43:53', '', '', NULL, NULL, ''),
+(15, '302059', 1, 417, 623, NULL, 1, 3.1, NULL, 0, '2020-10-05 05:20:12', '', '', NULL, NULL, '...'),
+(16, '548231', 0, 498, 10, NULL, 1, 23.6, NULL, 0, '2020-11-13 18:54:56', '', '', NULL, NULL, 'asd'),
+(17, '334633', 0, 503, 629, NULL, 1, 49, NULL, 0, '2021-05-22 12:52:05', '', '', NULL, NULL, '554'),
+(18, '859933', 0, 502, 10, NULL, 1, 5, NULL, 0, '2021-12-10 07:57:16', '', '', NULL, NULL, ''),
+(19, '446600', 0, 503, 630, NULL, 1, 49, NULL, 0, '2023-03-19 23:37:29', '', '', NULL, NULL, ''),
+(20, '443097', 0, 495, 631, NULL, 1, 1.18, NULL, 0, '2023-03-20 01:38:17', '', '', NULL, NULL, ''),
+(21, '373608', 0, 502, 633, NULL, 1, 5, NULL, 0, '2023-03-20 07:42:21', '', '', NULL, NULL, ''),
+(22, '596930', 0, 503, 634, NULL, 1, 49, NULL, 0, '2023-03-20 14:04:56', '', '', NULL, NULL, '');
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `slider`
+-- Table structure for table `slider`
 --
 
 CREATE TABLE `slider` (
@@ -653,7 +741,7 @@ CREATE TABLE `slider` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
--- Tablo döküm verisi `slider`
+-- Dumping data for table `slider`
 --
 
 INSERT INTO `slider` (`id`, `gorsel`) VALUES
@@ -664,7 +752,7 @@ INSERT INTO `slider` (`id`, `gorsel`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `uyeler`
+-- Table structure for table `uyeler`
 --
 
 CREATE TABLE `uyeler` (
@@ -673,32 +761,39 @@ CREATE TABLE `uyeler` (
   `password` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `phone_number` varchar(255) COLLATE utf8_turkish_ci NOT NULL DEFAULT 'Yok',
   `tc` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `adsoyad` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
-  `bakiye` float NOT NULL DEFAULT '0',
-  `vgbakiye` float NOT NULL DEFAULT '0',
-  `rutbe` int(11) NOT NULL DEFAULT '0',
-  `bayi` int(11) NOT NULL DEFAULT '0',
-  `bayi_indirim` float NOT NULL DEFAULT '0',
+  `bakiye` float NOT NULL DEFAULT 0,
+  `vgbakiye` float NOT NULL DEFAULT 0,
+  `rutbe` int(11) NOT NULL DEFAULT 0,
+  `bayi` int(11) NOT NULL DEFAULT 0,
+  `bayi_indirim` float NOT NULL DEFAULT 0,
   `siparis_code` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `trade_code` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
-  `facebook_login_token` text COLLATE utf8_turkish_ci,
+  `facebook_login_token` text COLLATE utf8_turkish_ci DEFAULT NULL,
   `api_key` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
   `last_login_ip` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
--- Tablo döküm verisi `uyeler`
+-- Dumping data for table `uyeler`
 --
 
 INSERT INTO `uyeler` (`id`, `email`, `password`, `phone_number`, `tc`, `created_at`, `adsoyad`, `bakiye`, `vgbakiye`, `rutbe`, `bayi`, `bayi_indirim`, `siparis_code`, `trade_code`, `facebook_login_token`, `api_key`, `last_login_ip`) VALUES
-(10, 'uyegram@yandex.com', 'e10adc3949ba59abbe56e057f20f883e', '5326154765', '0', '2017-12-22 21:05:41', 'Uye Gram', 113.9, 10, 1, 1, 0, 'dfb42c6a629e10d200aa48593c0ad4aa', 'a4da27431e', 'EAAEYTatZAISUBALuym87m2C6xvT1tRJxbZBkKbEVbdVnbZCQdcaebUkiaUNZCghp0rhPmZBAyF1P8Q1UzPpch9NDVxn6s9iugYZBZCHtnnocqBVBndZArqE9tzt3Vt9iq2uvfZBpTkS6STeT7hbssZASTW1Cy2vt4RsmYZD', '6a950f03efafb4cc09f003170a70b04c', '95.70.178.213'),
-(623, 'unsal@yilmazbilgisayar.net', 'e10adc3949ba59abbe56e057f20f883e', '02131231231', '56014182782', '2019-06-14 20:33:03', 'UNSAL YILMAZ', -1, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL);
+(10, 'admin@test.com', '4297f44b13955235245b2497399d7a93', '5351234567', '0', '2017-12-22 21:05:41', 'Uye Gram', 31.3, 110, 1, 0, 0, 'a1cf0a95ffb33adfb0aebc03add17a6e', 'a4da27431e', 'EAAEYTatZAISUBALuym87m2C6xvT1tRJxbZBkKbEVbdVnbZCQdcaebUkiaUNZCghp0rhPmZBAyF1P8Q1UzPpch9NDVxn6s9iugYZBZCHtnnocqBVBndZArqE9tzt3Vt9iq2uvfZBpTkS6STeT7hbssZASTW1Cy2vt4RsmYZD', '36578f9679068ab94fe1a2f314605639', '24.133.85.100'),
+(623, 'uye@test.com', 'e10adc3949ba59abbe56e057f20f883e', '02131231231', '11111111111', '2019-06-14 20:33:03', 'Ahmet TEST', -71.28, 0, 0, 1, 0, '86fd320490700e33c044b4955982f379', NULL, NULL, 'b11249f69717bff0638cb8c56a0b3f51', '178.233.242.143'),
+(628, 'akocak2568@gmail.com', '3d186804534370c3c817db0563f0e461', '5552344323', '11111111111', '2019-12-05 19:28:13', 'ihsan koçak', -32, 0, 0, 0, 0, '9df411058ead7fc0453a06d67362b147', NULL, NULL, '89fce95749b8ab65db70b1ff9e2cb59a', '78.176.107.242'),
+(629, 'cevdetaydin5879.ca@gmail.com', '0967611fa949958749ac4aea8aef6f62', '5556665544', '11111111111', '2021-05-22 12:31:58', 'Emre Şeker', -49, 0, 0, 0, 0, '3133d62af2985fcdb1bc0b36ed396a9c', NULL, NULL, '4b4e1c55a916cf0d909303560eb24151', '178.246.230.3'),
+(630, 'keremorer2017@gmail.com', '89480e573f04bddbee9db287144ee0e8', '05076789195', '11111111111', '2023-03-19 23:37:08', 'Kerem Emre Örer', -49, 0, 0, 0, 0, '1d72840fe4a3dc143cfd9bd47c4c0b1e', NULL, NULL, '4a68ec03d1ab28058940bbc35031ce53', '95.70.245.35'),
+(631, 'hdsunucu@gmail.com', '12d1a2a9637c4dce205d7df26da39c70', '05322893900', '11111111111', '2023-03-20 01:33:32', 'ahmet deniz', -1.18, 0, 0, 0, 0, '71ab39f34db0d8d266178f63d4d28343', NULL, NULL, '84d9ffe7a4ea31c11fc9f4815595c1da', '195.33.247.236'),
+(632, 'attila@gmail.com', '1ece337364bf81d8aa15a6c9eb8a62e3', '05445555556', '11111111111', '2023-03-20 04:53:15', 'Atilla', 0, 0, 0, 0, 0, 'f22c3fc15ec75ff43e41c03a2d776d40', NULL, NULL, 'a4733d3c627fbd66310fe5a54e04f974', '31.155.249.12'),
+(633, 'bybaskanofficial@gmail.com', 'c4e73cc8a6d2147f9ed7d067b8e3220d', '05357728112', '11111111111', '2023-03-20 07:41:35', 'akmed2121', -5, 0, 0, 0, 0, '821934e9107b5f46697d17eec01a2b30', NULL, NULL, 'a76d767889519e704b65d856ec6fafa2', '37.155.148.251'),
+(634, 'denemex@gmail.com', 'fe01ce2a7fbac8fafaed7c982a04e229', '05555555555', '11111111111', '2023-03-20 14:04:06', 'denemex', -49, 0, 0, 0, 0, 'c309cbc6954e8fa748b0cc9d8170b8d8', NULL, NULL, 'd920860077c26a8c0bd6c8621e4666ae', '81.215.213.60');
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `yardim`
+-- Table structure for table `yardim`
 --
 
 CREATE TABLE `yardim` (
@@ -708,234 +803,234 @@ CREATE TABLE `yardim` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
--- Tablo döküm verisi `yardim`
+-- Dumping data for table `yardim`
 --
 
 INSERT INTO `yardim` (`id`, `baslik`, `yazi`) VALUES
 (1, 'test', 'testt');
 
 --
--- Dökümü yapılmış tablolar için indeksler
+-- Indexes for dumped tables
 --
 
 --
--- Tablo için indeksler `bankalar`
+-- Indexes for table `bankalar`
 --
 ALTER TABLE `bankalar`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `bayi_kategori_indirimleri`
+-- Indexes for table `bayi_kategori_indirimleri`
 --
 ALTER TABLE `bayi_kategori_indirimleri`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `bize_sat`
+-- Indexes for table `bize_sat`
 --
 ALTER TABLE `bize_sat`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `cekim_bildirimleri`
+-- Indexes for table `cekim_bildirimleri`
 --
 ALTER TABLE `cekim_bildirimleri`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `chip_kategoriler`
+-- Indexes for table `chip_kategoriler`
 --
 ALTER TABLE `chip_kategoriler`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `chip_urunler`
+-- Indexes for table `chip_urunler`
 --
 ALTER TABLE `chip_urunler`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `codes`
+-- Indexes for table `codes`
 --
 ALTER TABLE `codes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `diger_ayarlar`
+-- Indexes for table `diger_ayarlar`
 --
 ALTER TABLE `diger_ayarlar`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `duyurular`
+-- Indexes for table `duyurular`
 --
 ALTER TABLE `duyurular`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `genel_ayarlar`
+-- Indexes for table `genel_ayarlar`
 --
 ALTER TABLE `genel_ayarlar`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `hareketler`
+-- Indexes for table `hareketler`
 --
 ALTER TABLE `hareketler`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `makaleler`
+-- Indexes for table `makaleler`
 --
 ALTER TABLE `makaleler`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `odeme_bildirimleri`
+-- Indexes for table `odeme_bildirimleri`
 --
 ALTER TABLE `odeme_bildirimleri`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `pay_api`
+-- Indexes for table `pay_api`
 --
 ALTER TABLE `pay_api`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `siparisler`
+-- Indexes for table `siparisler`
 --
 ALTER TABLE `siparisler`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `islem_no` (`islem_no`);
 
 --
--- Tablo için indeksler `slider`
+-- Indexes for table `slider`
 --
 ALTER TABLE `slider`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `uyeler`
+-- Indexes for table `uyeler`
 --
 ALTER TABLE `uyeler`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Tablo için indeksler `yardim`
+-- Indexes for table `yardim`
 --
 ALTER TABLE `yardim`
   ADD PRIMARY KEY (`id`);
 
 --
--- Dökümü yapılmış tablolar için AUTO_INCREMENT değeri
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- Tablo için AUTO_INCREMENT değeri `bankalar`
+-- AUTO_INCREMENT for table `bankalar`
 --
 ALTER TABLE `bankalar`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
--- Tablo için AUTO_INCREMENT değeri `bayi_kategori_indirimleri`
+-- AUTO_INCREMENT for table `bayi_kategori_indirimleri`
 --
 ALTER TABLE `bayi_kategori_indirimleri`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Tablo için AUTO_INCREMENT değeri `bize_sat`
+-- AUTO_INCREMENT for table `bize_sat`
 --
 ALTER TABLE `bize_sat`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Tablo için AUTO_INCREMENT değeri `cekim_bildirimleri`
+-- AUTO_INCREMENT for table `cekim_bildirimleri`
 --
 ALTER TABLE `cekim_bildirimleri`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Tablo için AUTO_INCREMENT değeri `chip_kategoriler`
+-- AUTO_INCREMENT for table `chip_kategoriler`
 --
 ALTER TABLE `chip_kategoriler`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
--- Tablo için AUTO_INCREMENT değeri `chip_urunler`
+-- AUTO_INCREMENT for table `chip_urunler`
 --
 ALTER TABLE `chip_urunler`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=506;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=507;
 
 --
--- Tablo için AUTO_INCREMENT değeri `codes`
+-- AUTO_INCREMENT for table `codes`
 --
 ALTER TABLE `codes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Tablo için AUTO_INCREMENT değeri `diger_ayarlar`
+-- AUTO_INCREMENT for table `diger_ayarlar`
 --
 ALTER TABLE `diger_ayarlar`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Tablo için AUTO_INCREMENT değeri `duyurular`
+-- AUTO_INCREMENT for table `duyurular`
 --
 ALTER TABLE `duyurular`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- Tablo için AUTO_INCREMENT değeri `genel_ayarlar`
+-- AUTO_INCREMENT for table `genel_ayarlar`
 --
 ALTER TABLE `genel_ayarlar`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Tablo için AUTO_INCREMENT değeri `hareketler`
+-- AUTO_INCREMENT for table `hareketler`
 --
 ALTER TABLE `hareketler`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=224;
 
 --
--- Tablo için AUTO_INCREMENT değeri `makaleler`
+-- AUTO_INCREMENT for table `makaleler`
 --
 ALTER TABLE `makaleler`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- Tablo için AUTO_INCREMENT değeri `odeme_bildirimleri`
+-- AUTO_INCREMENT for table `odeme_bildirimleri`
 --
 ALTER TABLE `odeme_bildirimleri`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- Tablo için AUTO_INCREMENT değeri `pay_api`
+-- AUTO_INCREMENT for table `pay_api`
 --
 ALTER TABLE `pay_api`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- Tablo için AUTO_INCREMENT değeri `siparisler`
+-- AUTO_INCREMENT for table `siparisler`
 --
 ALTER TABLE `siparisler`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- Tablo için AUTO_INCREMENT değeri `slider`
+-- AUTO_INCREMENT for table `slider`
 --
 ALTER TABLE `slider`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- Tablo için AUTO_INCREMENT değeri `uyeler`
+-- AUTO_INCREMENT for table `uyeler`
 --
 ALTER TABLE `uyeler`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=628;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=635;
 
 --
--- Tablo için AUTO_INCREMENT değeri `yardim`
+-- AUTO_INCREMENT for table `yardim`
 --
 ALTER TABLE `yardim`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
