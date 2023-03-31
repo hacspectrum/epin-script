@@ -18,4 +18,9 @@ TempoPlay, EnjoyPoker, TurnPoker
 
 Demo Sayfa:
 https://onlinepin.phpscript.info/
-https://onlinepin.phpscript.info/admin
+
+Veritabanındaki Admin Kullanıcısı
+admin@test.com
+123123
+giriş yaptıktan sonra
+/admin şeklinde adres cubugundan giriş yapınız. 
