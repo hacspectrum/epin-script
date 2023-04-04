@@ -39,7 +39,7 @@
       @@@
       * URUN KATEGORI TIPI
       ** 0 = NORMAL
-      @@@
+      @@@  
       */
 
       if(empty($urunNo) or empty($adet)){
@@ -57,7 +57,19 @@
           /* @ */
 
           $bayi = DB::getVar("SELECT bayi FROM uyeler WHERE id = '" . session("uye_id") . "'");
+          $bakiye = DB::getVar("SELECT bakiye FROM uyeler WHERE id = '" . session("uye_id") . "'");
 
+          if($bakiye<$toplamFiyat){
+            echo json_encode(
+              [
+                'error' => true,
+                'message' => 'Bakiyeniz yetersiz.'
+              ]
+            );
+            exit;
+          }
+          
+        
           $insertSiparis = DB::insert("INSERT INTO siparisler(islem_no,bayi,urun_id,uye_id,adet,email,password,odenen_tutar,musteri_aciklama) VALUES(?,?,?,?,?,?,?,?,?)",array(
             $islemNo,
             $bayi,
